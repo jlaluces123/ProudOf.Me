@@ -1,15 +1,18 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import Link from 'next/link';
 
 export default function Home() {
     return (
-        <div className={styles.container}>
+        <div>
             <Head>
-                <title>Create Next App</title>
+                <title>Proud Of Me</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
 
-            <h1 className='bg-blue-700'>Hello Next.js</h1>
+            <main>
+                <h1>Welcome to ProudOf.Me!</h1>
+                <Link>Get Started</Link>
+            </main>
         </div>
     );
 }
