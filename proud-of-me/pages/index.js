@@ -9,7 +9,7 @@ export default function Home() {
                 <link rel='icon' href='/favicon.ico' />
             </Head>
 
-            <h1>Hello Next.js</h1>
+            <h1 className='bg-blue-700'>Hello Next.js</h1>
         </div>
     );
 }
