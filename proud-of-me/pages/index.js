@@ -1,18 +1,14 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { signIn, signOut, useSession } from 'next-auth/client';
 
 export default function Home() {
+    const [session, loading] = useSession();
+
     return (
         <div>
-            <Head>
-                <title>Proud Of Me</title>
-                <link rel='icon' href='/favicon.ico' />
-            </Head>
-
-            <main>
-                <h1>Welcome to ProudOf.Me!</h1>
-                <Link>Get Started</Link>
-            </main>
+            {!session && <button onClick={signIn}>Sign In</button>}
+            {session && <h1>Signed in</h1>}
         </div>
     );
 }
