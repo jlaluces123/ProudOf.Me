@@ -17,8 +17,8 @@ export function Navigation(props) {
             {session && (
                 <div className='flex justify-between w-full'>
                     <span className='text-gray-600 text-lg border-b-2 border-gray-300'>
-                        ProudOf.
-                        <span className='text-black font-bold'>
+                        ProudOf.&nbsp;
+                        <span className='text-black font-bold capitalize'>
                             {session.user.name.split(' ')[0]}
                         </span>
                     </span>
