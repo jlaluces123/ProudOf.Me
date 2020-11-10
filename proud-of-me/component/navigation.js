@@ -7,20 +7,24 @@ export function Navigation(props) {
         <div className='h-12 my-4 mx-4 flex items-center'>
             {!session && (
                 <div className='flex justify-between w-full'>
-                    <span>ProudOf.Me</span>
+                    <span className='text-gray-600 text-lg border-b-2 border-gray-300'>
+                        ProudOf.Me
+                    </span>
                     <button onClick={signIn}>Sign in</button>
                 </div>
             )}
 
-            <div className='flex justify-between w-full'>
-                <span className='text-gray-600 text-lg'>
-                    ProudOf.
-                    <span className='text-black font-bold'>
-                        {session.user.name.split(' ')[0]}
+            {session && (
+                <div className='flex justify-between w-full'>
+                    <span className='text-gray-600 text-lg border-b-2 border-gray-300'>
+                        ProudOf.
+                        <span className='text-black font-bold'>
+                            {session.user.name.split(' ')[0]}
+                        </span>
                     </span>
-                </span>
-                <button onClick={signOut}>Sign out</button>
-            </div>
+                    <button onClick={signOut}>Sign out</button>
+                </div>
+            )}
         </div>
     );
 }
