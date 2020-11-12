@@ -3,8 +3,9 @@ const User = require('./User');
 
 const AccomplishmentSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    user: {
-        ref: User,
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
     },
     title: {
         type: String,

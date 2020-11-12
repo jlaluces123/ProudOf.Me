@@ -11,7 +11,7 @@ export default function Home() {
     return (
         <div className='max-h-full flex flex-col h-screen'>
             <Navigation />
-            {!session && <button onClick={signIn}>Sign In</button>}
+            {!session && <a href='/api/google'>Sign In</a>}
             {session && <Mantra />}
         </div>
     );
