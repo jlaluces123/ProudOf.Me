@@ -1,8 +1,6 @@
-const passport = require('passport');
-const passportConfig = require('../../../config/passport');
-const nc = require('next-connect');
-// const { useCookie } = require('../../../utils/useCookie');
 const cookieSession = require('cookie-session');
+const nc = require('next-connect');
+const passport = require('passport');
 // CB Route for google redirect
 /*
     - Once browser reaches here we recieve:
@@ -10,6 +8,11 @@ const cookieSession = require('cookie-session');
             - We can use this code in exchange for information
         2. Fires Passport CB function
 */
+
+// export default async (req, res) => {
+//     res.send('Welcome: ');
+//     console.log('User');
+// };
 
 const handler = nc();
 
@@ -19,12 +22,12 @@ handler.use(
         keys: [process.env.KEYS],
     })
 );
+
 handler.use(passport.initialize());
 handler.use(passport.session());
 
-handler.get(passport.authenticate('google'), (req, res) => {
-    // res.send(req.user);
-    res.redirect(`/api/profile/`);
+handler.get((req, res) => {
+    res.send(`Welcome ${req.user.username}`);
 });
 
 export default handler;
