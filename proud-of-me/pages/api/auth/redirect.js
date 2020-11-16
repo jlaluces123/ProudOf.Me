@@ -1,4 +1,6 @@
 const passport = require('passport');
+const passportConfig = require('../../../config/passport');
+const nc = require('next-connect');
 // CB Route for google redirect
 /*
     - Once browser reaches here we recieve:
@@ -7,21 +9,12 @@ const passport = require('passport');
         2. Fires Passport CB function
 */
 
-// passport.authenticate('google');
-// export default passport.authenticate('google');
-// function runMiddleware(req, res, fn) {
-//     return new Promise((resolve, reject) => {
-//         fn(req, res, (result) => {
-//             console.log('result: ', result);
-//             if (result instanceof Error) {
-//                 return reject(result);
-//             }
+const handler = nc();
 
-//             return resolve(result);
-//         });
-//     });
-// }
+handler.use(passport.initialize());
 
-const handler = (req, res) => {
-    res.send('Middleware working?');
-};
+handler.get(passport.authenticate('google'), (req, res) => {
+    res.send('Working Now?');
+});
+
+export default handler;

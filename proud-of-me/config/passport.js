@@ -11,7 +11,7 @@ passport.use(
         },
         (accessToken, refreshToken, profile, done) => {
             // Callback for passport
-            console.log(accessToken);
+            console.log(profile);
             console.log('passport-config cb reached');
         }
     )
