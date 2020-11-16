@@ -9,8 +9,10 @@ passport.use(
             clientSecret: process.env.CLIENT_SECRET,
             callbackURL: '/api/auth/redirect',
         },
-        () => {
+        (accessToken, refreshToken, profile, done) => {
             // Callback for passport
+            console.log(accessToken);
+            console.log('passport-config cb reached');
         }
     )
 );
