@@ -7,7 +7,7 @@ passport.use(
             // Options used for strategy
             clientID: process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
-            callbackURL: '/api/auth/google/redirect',
+            callbackURL: '/api/auth/redirect',
         },
         () => {
             // Callback for passport
