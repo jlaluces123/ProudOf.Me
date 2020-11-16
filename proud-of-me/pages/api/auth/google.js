@@ -1,4 +1,7 @@
+const passport = require('passport');
+const passportConfig = require('../../../config/passport');
+
 // Login Service
-export default async (req, res) => {
-    // Handle with PassportJS
-};
+export default passport.authenticate('google', {
+    scope: ['profile'],
+});
