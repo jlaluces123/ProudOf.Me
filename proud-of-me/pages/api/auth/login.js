@@ -1,3 +1,3 @@
 export default async (req, res) => {
-    res.send('Login Page');
+    res.render('login.js', { user: req.user });
 };

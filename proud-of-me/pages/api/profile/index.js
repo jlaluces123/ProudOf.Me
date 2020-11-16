@@ -26,8 +26,13 @@ handler.use(
 handler.use(passport.initialize());
 handler.use(passport.session());
 
+handler.use((req, res, next) => {
+    if (!req.user) res.redirect('/api/auth/login');
+    next();
+});
+
 handler.get((req, res) => {
-    res.send(`Welcome ${req.user.username}`);
+    res.send({ user: req.user }).json({ user: req.user });
 });
 
 export default handler;
