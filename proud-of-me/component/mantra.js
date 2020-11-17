@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { PlusIcon } from '../assets/index';
+import { useSession } from 'next-auth/client';
 
 export function Mantra() {
     const [mantra, setMantra] = useState('');
+    const [session, loading] = useSession();
 
     const handleSubmit = (e) => {
         e.preventDefault();

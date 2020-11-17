@@ -6,24 +6,14 @@ import { Navigation } from '../component/navigation';
 import { Mantra } from '../component/mantra';
 import React, { useState, useEffect } from 'react';
 
-export default function Home(props) {
+export default function Home() {
     const [session, loading] = useSession();
-    const [loggedIn, setLoggedIn] = useState(false);
 
     return (
         <div className='max-h-full flex flex-col h-screen'>
             <Navigation />
-            {props.user && <Mantra />}
-            {!props.user && <a href='/api/auth/google'>Log In</a>}
+            {session && <Mantra />}
+            {!session && <button onClick={signIn}>Sign In With Google</button>}
         </div>
     );
-}
-
-export async function getStaticProps(context) {
-    const res = await fetch('http://localhost:3000/api/profile');
-    const user = await res.json();
-
-    return {
-        props: { user },
-    };
 }

@@ -5,16 +5,16 @@ export function Navigation(props) {
 
     return (
         <div className='h-12 my-4 mx-4 flex items-center'>
-            {!props.user && (
+            {!session && (
                 <div className='flex justify-between w-full'>
                     <span className='text-gray-600 text-lg border-b-2 border-gray-300'>
                         ProudOf.Me
                     </span>
-                    <button onClick={signIn}>Sign in</button>
+                    <a href='/api/auth/google'>Sign in</a>
                 </div>
             )}
 
-            {props.user && (
+            {session && (
                 <div className='flex justify-between w-full'>
                     <span className='text-gray-600 text-lg border-b-2 border-gray-300'>
                         ProudOf.&nbsp;
@@ -22,7 +22,7 @@ export function Navigation(props) {
                             {props.user.username}
                         </span>
                     </span>
-                    <button onClick={signOut}>Sign out</button>
+                    <a href='/api/auth/logout'>Sign Out</a>
                 </div>
             )}
         </div>
