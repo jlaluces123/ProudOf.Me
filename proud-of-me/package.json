@@ -1,23 +1,24 @@
 {
-  "name": "proud-of-me",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "cookie-session": "^1.4.0",
-    "mongodb": "^3.6.3",
-    "mongoose": "^5.10.13",
-    "next": "10.0.1",
-    "next-auth": "^3.1.0",
-    "next-connect": "^0.9.1",
-    "passport": "^0.4.1",
-    "passport-google-oauth20": "^2.0.0",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "tailwindcss": "^1.9.6"
-  }
+    "name": "proud-of-me",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start"
+    },
+    "dependencies": {
+        "cookie-session": "^1.4.0",
+        "mongodb": "^3.6.3",
+        "mongoose": "^5.10.13",
+        "next": "10.0.1",
+        "next-auth": "^3.1.0",
+        "next-connect": "^0.9.1",
+        "passport": "^0.4.1",
+        "passport-google-oauth20": "^2.0.0",
+        "react": "17.0.1",
+        "react-dom": "17.0.1",
+        "reflect-metadata": "^0.1.13",
+        "tailwindcss": "^1.9.6"
+    }
 }

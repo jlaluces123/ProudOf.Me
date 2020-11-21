@@ -1,11 +1,12 @@
-import { signIn, signOut, useSession } from 'next-auth/client';
+// import { signIn, signOut, useSession } from 'next-auth/client';
 
 export function Navigation(props) {
-    const [session, loading] = useSession();
+    // const [session, loading] = useSession();
+    const [user, setUser] = useState(null);
 
     return (
         <div className='h-12 my-4 mx-4 flex items-center'>
-            {!session && (
+            {!user && (
                 <div className='flex justify-between w-full'>
                     <span className='text-gray-600 text-lg border-b-2 border-gray-300'>
                         ProudOf.Me
@@ -14,7 +15,7 @@ export function Navigation(props) {
                 </div>
             )}
 
-            {session && (
+            {user && (
                 <div className='flex justify-between w-full'>
                     <span className='text-gray-600 text-lg border-b-2 border-gray-300'>
                         ProudOf.&nbsp;
