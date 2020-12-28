@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Navigation from './navigation';
 
 const Profile = () => {
     const [id, setId] = useState();
@@ -33,7 +34,10 @@ const Profile = () => {
     return (
         <div>
             {id && user ? (
-                <h1>Welcome: {user.username}</h1>
+                <div>
+                    <Navigation user={user} username={user.username} />
+                    <h1>Welcome: {user.username}</h1>
+                </div>
             ) : (
                 <h1>No User Found Yet</h1>
             )}
