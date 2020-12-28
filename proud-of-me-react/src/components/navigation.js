@@ -12,7 +12,7 @@ const Navigation = (props) => {
         <div>
             {props.user ? (
                 <div className='flex justify-between mx-6 h-20 items-center'>
-                    <h1 className='text-gray-600'>
+                    <h1 className='text-gray-600 tracking-wide'>
                         ProudOf.
                         <span className='font-bold text-black text-lg'>
                             {props.username}
