@@ -7,11 +7,9 @@ const Profile = () => {
     const [user, setUser] = useState();
 
     useEffect(() => {
-        if (!id || !user) {
-            let url = window.location.pathname;
-            url.split('/');
-            setId(url.split('/')[2]);
-        }
+        let url = window.location.pathname;
+        url.split('/');
+        setId(url.split('/')[2]);
     }, []);
 
     useEffect(() => {

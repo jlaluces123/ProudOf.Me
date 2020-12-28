@@ -11,9 +11,16 @@ const Navigation = (props) => {
     return (
         <div>
             {props.user ? (
-                <div>
-                    <h1>ProudOf.{props.username}</h1>
-                    <Link to='/'>Sign Out</Link>
+                <div className='flex justify-between mx-6 h-20 items-center'>
+                    <h1 className='text-gray-600'>
+                        ProudOf.
+                        <span className='font-bold text-black text-lg'>
+                            {props.username}
+                        </span>
+                    </h1>
+                    <Link to='/' className='text-gray-600'>
+                        Sign Out
+                    </Link>
                 </div>
             ) : (
                 <div>
