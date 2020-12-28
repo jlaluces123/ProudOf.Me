@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import Navigation from './navigation';
+import Mantra from './mantra';
 
 const Profile = () => {
     const [id, setId] = useState();
@@ -34,7 +36,7 @@ const Profile = () => {
             {id && user ? (
                 <div>
                     <Navigation user={user} username={user.username} />
-                    <h1>Welcome: {user.username}</h1>
+                    <Mantra userId={id} />
                 </div>
             ) : (
                 <h1>No User Found Yet</h1>
