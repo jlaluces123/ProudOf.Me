@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import Navigation from './navigation';
+import Mantra from './mantra';
+
 const Profile = () => {
     const [id, setId] = useState();
     const [user, setUser] = useState();
 
     useEffect(() => {
-        if (!id || !user) {
-            let url = window.location.pathname;
-            url.split('/');
-            setId(url.split('/')[2]);
-        }
+        let url = window.location.pathname;
+        url.split('/');
+        setId(url.split('/')[2]);
     }, []);
 
     useEffect(() => {
@@ -33,7 +34,10 @@ const Profile = () => {
     return (
         <div>
             {id && user ? (
-                <h1>Welcome: {user.username}</h1>
+                <div>
+                    <Navigation user={user} username={user.username} />
+                    <Mantra userId={id} />
+                </div>
             ) : (
                 <h1>No User Found Yet</h1>
             )}
