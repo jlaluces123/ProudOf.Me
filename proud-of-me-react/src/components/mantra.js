@@ -33,11 +33,13 @@ const Mantra = (props) => {
     };
 
     return (
-        <div className='flex flex-col mx-6'>
-            <h1>What is Your Mantra For Today?</h1>
+        <div className='flex flex-col mx-6 mt-6 items-center'>
+            <h1 className='font-semibold text-xl'>
+                What is Your Mantra For Today?
+            </h1>
             <form action='POST' onSubmit={(e) => handleMantra(e)}>
                 <input
-                    className='border-b font-medium my-4 pl-2 placeholder-gray-400 py-2 rounded'
+                    className='border-b-2 font-medium mb-4 mt-2 placeholder-gray-400 py-2 rounded text-center text-green-500'
                     placeholder='Only I can control my thoughts.'
                     value={mantra}
                     type='text'

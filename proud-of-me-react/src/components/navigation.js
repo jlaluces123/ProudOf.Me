@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const Navigation = (props) => {
     return (
-        <div>
+        <div className='border-b'>
             {props.user ? (
                 <div className='flex justify-between mx-6 h-20 items-center'>
                     <h1 className='text-gray-600 tracking-wide'>
