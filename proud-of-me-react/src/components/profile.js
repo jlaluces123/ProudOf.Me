@@ -16,6 +16,7 @@ const Profile = () => {
     }, []);
 
     useEffect(() => {
+        let mounted = true;
         console.log('ID has changed: ', id);
         async function getProfile() {
             let userId = id;
@@ -24,12 +25,16 @@ const Profile = () => {
                     `https://proud-of-me-backend.herokuapp.com/api/user/${userId}`
                 )
                 .then((response) => {
-                    setUser(Object.values(response.data.user)[0]);
+                    if (mounted) {
+                        setUser(Object.values(response.data.user)[0]);
+                    }
                 })
                 .catch((err) => console.log(err));
         }
 
         getProfile();
+
+        return () => (mounted = false);
     }, [id]);
 
     return (
