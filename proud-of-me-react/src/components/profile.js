@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Navigation from './navigation';
 import Mantra from './mantra';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
     const [id, setId] = useState();
@@ -37,6 +38,7 @@ const Profile = () => {
                 <div>
                     <Navigation user={user} username={user.username} />
                     <Mantra userId={id} />
+                    <Link to={`/user/${id}/moments`}>Record Your Victory</Link>
                 </div>
             ) : (
                 <h1>No User Found Yet</h1>
