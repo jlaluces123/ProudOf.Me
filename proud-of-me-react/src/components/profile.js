@@ -8,37 +8,58 @@ import { Link } from 'react-router-dom';
 const Profile = () => {
     const [id, setId] = useState();
     const [user, setUser] = useState();
+    const [moments, setMoments] = useState();
 
     useEffect(() => {
         let url = window.location.pathname;
         url.split('/');
-        setId(url.split('/')[2]);
-    }, []);
+        let userId = url.split('/')[2];
+        let mounted = true;
 
-    useEffect(() => {
-        console.log('ID has changed: ', id);
         async function getProfile() {
-            let userId = id;
+            console.log(userId);
+
             await axios
-                .get(
-                    `https://proud-of-me-backend.herokuapp.com/api/user/${userId}`
+                .all([
+                    axios.get(`http://localhost:3388/api/user/${userId}`),
+                    axios.get(
+                        `http://localhost:3388/api/user/${userId}/moments`
+                    ),
+                ])
+                .then(
+                    axios.spread((resOne, resTwo) => {
+                        console.log('Respone One: ', resOne);
+                        console.log('Response Two: ', resTwo);
+
+                        if (mounted) {
+                            console.log('mounted');
+                            console.log(resOne.data.user);
+                            setUser(resOne.data.user);
+                            setMoments(resTwo.data);
+                        }
+                    })
                 )
-                .then((response) => {
-                    setUser(Object.values(response.data.user)[0]);
-                })
-                .catch((err) => console.log(err));
+                .catch((errors) => console.log('Errors: ', errors));
         }
 
         getProfile();
-    }, [id]);
+
+        return () => (mounted = false);
+    }, []);
+
+    useEffect(() => {
+        console.log('User object updated: ', user);
+    }, [user]);
 
     return (
         <div>
-            {id && user ? (
+            {user ? (
                 <div>
                     <Navigation user={user} username={user.username} />
-                    <Mantra userId={id} />
-                    <Link to={`/user/${id}/moments`}>Record Your Victory</Link>
+                    <Mantra userId={user.googleId} />
+                    <Link to={`/user/${user.googleId}/moments`}>
+                        Record Your Victory
+                    </Link>
                 </div>
             ) : (
                 <h1>No User Found Yet</h1>
