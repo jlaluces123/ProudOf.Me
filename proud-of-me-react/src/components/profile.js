@@ -20,16 +20,27 @@ const Profile = () => {
         console.log('ID has changed: ', id);
         async function getProfile() {
             let userId = id;
+
             await axios
-                .get(
-                    `https://proud-of-me-backend.herokuapp.com/api/user/${userId}`
+                .all([
+                    axios.get(
+                        `https://proud-of-me-backend.herokuapp.com/api/user/${userId}`
+                    ),
+                    axios.get(
+                        `https://proud-of-me-backend.herokuapp.com/api/user/${userId}/moments`
+                    ),
+                ])
+                .then(
+                    axios.spread((resOne, resTwo) => {
+                        console.log('Response One: ', resOne);
+                        console.log('Response Two: ', resTwo);
+
+                        if (mounted) {
+                            console.log('mounted');
+                        }
+                    })
                 )
-                .then((response) => {
-                    if (mounted) {
-                        setUser(Object.values(response.data.user)[0]);
-                    }
-                })
-                .catch((err) => console.log(err));
+                .catch((errors) => console.log(errors));
         }
 
         getProfile();
