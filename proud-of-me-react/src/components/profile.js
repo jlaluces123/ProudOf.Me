@@ -12,33 +12,27 @@ const Profile = () => {
     useEffect(() => {
         let url = window.location.pathname;
         url.split('/');
-        setId(url.split('/')[2]);
-    }, []);
-
-    useEffect(() => {
+        let userId = url.split('/')[2];
         let mounted = true;
-        console.log('ID has changed: ', id);
+
         async function getProfile() {
             console.log('Inside Get Profile: ');
-            let userId = id;
+            console.log(userId);
 
             await axios
                 .all([
-                    axios.get(
-                        `https://proud-of-me-backend.herokuapp.com/api/user/${userId}`
-                    ),
+                    axios.get(`http://localhost:3388/api/user/${userId}`),
                     axios.get(
                         `http://localhost:3388/api/user/${userId}/moments`
                     ),
                 ])
                 .then(
                     axios.spread((resOne, resTwo) => {
-                        console.log('Response One: ', resOne);
+                        console.log('Respone One: ', resOne);
                         console.log('Response Two: ', resTwo);
 
                         if (mounted) {
                             console.log('mounted');
-                            setUser(resOne.data.user[0]);
                         }
                     })
                 )
@@ -48,15 +42,11 @@ const Profile = () => {
         getProfile();
 
         return () => (mounted = false);
-    }, [id]);
-
-    useEffect(() => {
-        console.log('User has changed: ', user);
-    }, [user]);
+    }, []);
 
     return (
         <div>
-            {id && user ? (
+            {user ? (
                 <div>
                     <Navigation user={user} username={user.username} />
                     <Mantra userId={id} />
