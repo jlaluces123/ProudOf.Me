@@ -19,6 +19,7 @@ const Profile = () => {
         let mounted = true;
         console.log('ID has changed: ', id);
         async function getProfile() {
+            console.log('Inside Get Profile: ');
             let userId = id;
 
             await axios
@@ -27,7 +28,7 @@ const Profile = () => {
                         `https://proud-of-me-backend.herokuapp.com/api/user/${userId}`
                     ),
                     axios.get(
-                        `https://proud-of-me-backend.herokuapp.com/api/user/${userId}/moments`
+                        `http://localhost:3388/api/user/${userId}/moments`
                     ),
                 ])
                 .then(
@@ -37,16 +38,21 @@ const Profile = () => {
 
                         if (mounted) {
                             console.log('mounted');
+                            setUser(resOne.data.user[0]);
                         }
                     })
                 )
-                .catch((errors) => console.log(errors));
+                .catch((errors) => console.log('Errors: ', errors));
         }
 
         getProfile();
 
         return () => (mounted = false);
     }, [id]);
+
+    useEffect(() => {
+        console.log('User has changed: ', user);
+    }, [user]);
 
     return (
         <div>
