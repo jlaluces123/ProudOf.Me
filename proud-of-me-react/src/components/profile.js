@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 const Profile = () => {
     const [id, setId] = useState();
     const [user, setUser] = useState();
+    const [moments, setMoments] = useState();
 
     useEffect(() => {
         let url = window.location.pathname;
@@ -16,7 +17,6 @@ const Profile = () => {
         let mounted = true;
 
         async function getProfile() {
-            console.log('Inside Get Profile: ');
             console.log(userId);
 
             await axios
@@ -33,6 +33,9 @@ const Profile = () => {
 
                         if (mounted) {
                             console.log('mounted');
+                            console.log(resOne.data.user);
+                            setUser(resOne.data.user);
+                            setMoments(resTwo.data);
                         }
                     })
                 )
@@ -44,13 +47,19 @@ const Profile = () => {
         return () => (mounted = false);
     }, []);
 
+    useEffect(() => {
+        console.log('User object updated: ', user);
+    }, [user]);
+
     return (
         <div>
             {user ? (
                 <div>
                     <Navigation user={user} username={user.username} />
-                    <Mantra userId={id} />
-                    <Link to={`/user/${id}/moments`}>Record Your Victory</Link>
+                    <Mantra userId={user.googleId} />
+                    <Link to={`/user/${user.googleId}/moments`}>
+                        Record Your Victory
+                    </Link>
                 </div>
             ) : (
                 <h1>No User Found Yet</h1>
