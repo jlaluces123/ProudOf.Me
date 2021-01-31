@@ -4,6 +4,7 @@ import axios from 'axios';
 import Navigation from './navigation';
 import Mantra from './mantra';
 import { Link } from 'react-router-dom';
+import MomentList from './momentList';
 
 const Profile = () => {
     const [id, setId] = useState();
@@ -60,6 +61,7 @@ const Profile = () => {
                     <Link to={`/user/${user.googleId}/moments`}>
                         Record Your Victory
                     </Link>
+                    <MomentList moments={moments} />
                 </div>
             ) : (
                 <h1>No User Found Yet</h1>
