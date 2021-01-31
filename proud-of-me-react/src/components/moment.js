@@ -64,13 +64,13 @@ const Moment = (props) => {
     }, []);
 
     return (
-        <div>
+        <div className='shadow-md w-49'>
             <div>
                 {/* Title Here */}
                 <h1>{props.title}</h1>
             </div>
 
-            <div className='custom-gradient'>
+            <div className='bg-gray-300'>
                 {/* Story summary here */}
                 <p>{props.story}</p>
             </div>

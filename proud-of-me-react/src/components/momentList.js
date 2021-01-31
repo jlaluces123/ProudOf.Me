@@ -3,7 +3,7 @@ import Moment from './moment';
 
 const MomentList = (props) => {
     return (
-        <div>
+        <div className='flex flex-row flex-wrap justify-between'>
             {/* Map Moments here */}
             {props.moments
                 ? props.moments.map((moment, idx) => {
