@@ -6,16 +6,13 @@ const MomentList = (props) => {
         <div className='flex flex-row flex-wrap justify-between'>
             {/* Map Moments here */}
             {props.moments
-                ? props.moments.map((moment, idx) => {
-                      console.log('Moment map: ', moment);
-                      return (
-                          <Moment
-                              key={idx}
-                              title={moment.title}
-                              story={moment.story}
-                          />
-                      );
-                  })
+                ? props.moments.map((moment, idx) => (
+                      <Moment
+                          key={idx}
+                          title={moment.title}
+                          story={moment.story}
+                      />
+                  ))
                 : null}
         </div>
     );
