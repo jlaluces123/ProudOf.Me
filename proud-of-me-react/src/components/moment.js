@@ -65,14 +65,14 @@ const Moment = (props) => {
 
     return (
         <div className='shadow-md w-49 mb-4 border rounded-lg'>
+            <div className='flex items-center bg-gray-300 h-32 pl-4 truncate rounded-t-lg'>
+                {/* Story summary here */}
+                <p>{props.story}</p>
+            </div>
+
             <div className='p-2'>
                 {/* Title Here */}
                 <h1>{props.title.toLowerCase()}</h1>
-            </div>
-
-            <div className='flex items-center bg-gray-300 h-32 pl-4 truncate rounded-b-lg'>
-                {/* Story summary here */}
-                <p>{props.story}</p>
             </div>
         </div>
     );
