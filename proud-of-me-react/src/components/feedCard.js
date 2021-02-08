@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Chat, Heart, Bookmark } from './icons/index';
+import moment from 'moment';
 
 const FeedCard = ({ _id, createdAt, updatedAt, title, story, userId }) => {
-    useEffect(() => {}, []);
+    const formatDate = (date) => {
+        let formattedDate = moment(date).fromNow();
+        createdAt = formattedDate;
+    };
+    useEffect(() => {
+        formatDate(createdAt);
+    }, []);
 
     return (
         <div className='bg-white flex flex-col h-60 justify-between my-4 pt-4 px-4 shadow-md w-full'>
@@ -18,7 +25,7 @@ const FeedCard = ({ _id, createdAt, updatedAt, title, story, userId }) => {
                     </Link>
                 </div>
                 <span className='text-gray-400 text-xs font-semibold tracking-wider'>
-                    {'02/10/21'}
+                    {moment(createdAt).fromNow()}
                 </span>
             </header>
 

@@ -14,7 +14,7 @@ const Feed = () => {
     const getFeedData = () => {
         axios
             .get('http://localhost:3388/api/users/feed')
-            .then((data) => setStories(data.data.moments))
+            .then((data) => setStories(data.data.moments.reverse()))
             .catch((err) => console.error(err));
     };
 
@@ -34,7 +34,7 @@ const Feed = () => {
                 {stories &&
                     stories.map((story) => {
                         // console.log('Story prop: ', story);
-                        return <FeedCard {...story} />;
+                        return <FeedCard key={story._id} {...story} />;
                     })}
             </section>
         </div>
