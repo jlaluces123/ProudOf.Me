@@ -4,29 +4,48 @@ import { Chat, Heart, Bookmark } from './icons/index';
 import moment from 'moment';
 import axios from 'axios';
 
-const FeedCard = ({ _id, createdAt, updatedAt, title, story, userId }) => {
-    const [name, setName] = useState('');
-    const [profilePicture, setProfilePicture] = useState();
+const FeedCard = ({
+    _id,
+    createdAt,
+    updatedAt,
+    title,
+    story,
+    userId,
+    photo,
+}) => {
+    const [user, setUser] = useState({});
 
-    const getUserData = (id) => {
+    const getUserData = (userId) => {
         axios
-            .get(`http://localhost:3388/api/user/${id}`)
-            .then((data) => console.log(data))
+            .get(`http://localhost:3388/api/users/find/${userId}`)
+            .then((data) => setUser(data.data))
             .catch((err) => console.error(err));
     };
 
-    useEffect(() => getUserData(userId), []);
+    useEffect(() => {
+        getUserData(userId);
+    }, []);
 
     return (
         <div className='bg-white flex flex-col h-60 justify-between my-4 pt-4 px-4 shadow-md w-full'>
             <header className='flex flex-row justify-between items-center'>
-                <div className='flex flex-row'>
-                    <div className='h-6 w-6 bg-blue-200 rounded-full'></div>
+                <div className='flex flex-row items-center'>
+                    <div>
+                        {user.photo ? (
+                            <img
+                                className='h-10 w-10 rounded-full'
+                                src={`${user.photo}`}
+                                alt='User Profile Picture'
+                            />
+                        ) : (
+                            <div className='bg-blue-200 h-10 w-10 rounded-full' />
+                        )}
+                    </div>
                     <Link
                         to={`/profile/${userId}`}
                         className='font-bold ml-2 text-gray-800'
                     >
-                        {'George'}
+                        {user.username}
                     </Link>
                 </div>
                 <span className='text-gray-400 text-xs font-semibold tracking-wider'>
