@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import FeedCard from './feedCard';
 
 /* 
     This component will:
@@ -25,14 +26,16 @@ const Feed = () => {
 
     return (
         <div>
-            <section className='bg-blue-200'>
+            <section className='bg-white flex font-bold h-16 items-center justify-center my-2 text-gray-800 text-lg tracking-wide uppercase'>
                 <h1>Discover</h1>
             </section>
 
-            <section className='mx-8 flex flex-col items-center'>
-                <div className='bg-red-200 m-4 w-full h-32'></div>
-                <div className='bg-red-200 m-4 w-full h-32'></div>
-                <div className='bg-red-200 m-4 w-full h-32'></div>
+            <section className='flex flex-col items-center'>
+                {stories &&
+                    stories.map((story) => {
+                        // console.log('Story prop: ', story);
+                        return <FeedCard {...story} />;
+                    })}
             </section>
         </div>
     );
