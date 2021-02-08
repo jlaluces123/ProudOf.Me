@@ -11,8 +11,8 @@ function App() {
             <Switch>
                 <Route exact path='/' component={Home} />
                 <Route path='/user/:userId/moments' component={MomentForm} />
+                <Route path='/user/:userId/feed' component={Feed} />
                 <Route path='/user/:userId' component={Profile} />
-                <Route path='/feed' component={Feed} />
                 <Route path='/login' component={Login} />
             </Switch>
         </div>

@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Chat, Heart, Bookmark } from './icons/index';
 import moment from 'moment';
+import axios from 'axios';
 
 const FeedCard = ({ _id, createdAt, updatedAt, title, story, userId }) => {
-    const formatDate = (date) => {
-        let formattedDate = moment(date).fromNow();
-        createdAt = formattedDate;
+    const [name, setName] = useState('');
+    const [profilePicture, setProfilePicture] = useState();
+
+    const getUserData = (id) => {
+        axios
+            .get(`http://localhost:3388/api/user/${id}`)
+            .then((data) => console.log(data))
+            .catch((err) => console.error(err));
     };
-    useEffect(() => {
-        formatDate(createdAt);
-    }, []);
+
+    useEffect(() => getUserData(userId), []);
 
     return (
         <div className='bg-white flex flex-col h-60 justify-between my-4 pt-4 px-4 shadow-md w-full'>
