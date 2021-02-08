@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Chat, Heart, Bookmark } from './icons/index';
 
 const FeedCard = ({ _id, createdAt, updatedAt, title, story, userId }) => {
     useEffect(() => {}, []);
@@ -38,9 +39,15 @@ const FeedCard = ({ _id, createdAt, updatedAt, title, story, userId }) => {
                     223 Likes
                 </span>
                 <div className='flex flex-row justify-between w-1/3'>
-                    <div className='h-6 w-6 bg-blue-200 rounded-full'></div>
-                    <div className='h-6 w-6 bg-blue-200 rounded-full'></div>
-                    <div className='h-6 w-6 bg-blue-200 rounded-full'></div>
+                    <div>
+                        <Heart />
+                    </div>
+                    <div>
+                        <Chat />
+                    </div>
+                    <div>
+                        <Bookmark />
+                    </div>
                 </div>
             </footer>
         </div>
