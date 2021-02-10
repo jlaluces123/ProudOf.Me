@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FeedCard from './feedCard';
+import Home from './icons/home';
 
 /* 
     This component will:
@@ -22,15 +23,17 @@ const Feed = () => {
         getFeedData();
     }, []);
 
-    useEffect(() => console.log('Stories Changed: ', stories), [stories]);
-
     return (
         <div>
-            <section className='bg-white flex font-bold h-16 items-center justify-center my-2 text-gray-800 text-lg tracking-wide uppercase'>
+            <section className='bg-white border-b fixed flex font-bold h-16 items-center justify-between left-0 px-6 shadow-lg text-gray-800 text-lg top-0 tracking-wide uppercase w-full'>
+                <div>
+                    <Home />
+                </div>
                 <h1>Discover</h1>
+                <div className='w-6 h-6' />
             </section>
 
-            <section className='flex flex-col items-center'>
+            <section className='flex flex-col items-center mt-16'>
                 {stories &&
                     stories.map((story) => {
                         // console.log('Story prop: ', story);
