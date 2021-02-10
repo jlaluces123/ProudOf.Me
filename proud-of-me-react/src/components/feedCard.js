@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Chat, Heart, Bookmark } from './icons/index';
 import moment from 'moment';
 import axios from 'axios';
+import PreviousMap from 'postcss/lib/previous-map';
 
 const FeedCard = ({
     _id,
@@ -12,8 +13,13 @@ const FeedCard = ({
     story,
     userId,
     photo,
+    likes,
+    usersWhoLiked,
+    getFeedData,
 }) => {
     const [user, setUser] = useState({});
+    const [modified, setModified] = useState();
+    const [liked, setLiked] = useState(false);
 
     const getUserData = (userId) => {
         axios
@@ -22,8 +28,40 @@ const FeedCard = ({
             .catch((err) => console.error(err));
     };
 
+    const handleLikeClick = (e, momentId) => {
+        e.preventDefault();
+
+        // Check if user is in usersWhoLiked array (aka. they already liked, now unliking post)
+        if (usersWhoLiked.includes(userId)) {
+            axios
+                .post(`http://localhost:3388/api/moments/${momentId}/likes`, {
+                    action: 'unlike',
+                    userId,
+                })
+                .then((response) => {
+                    console.log('Response handleLike unlike: ', response);
+                    setLiked(false);
+                    getFeedData();
+                })
+                .catch((err) => console.error(err));
+        } else {
+            axios
+                .post(`http://localhost:3388/api/moments/${momentId}/likes`, {
+                    action: 'like',
+                    userId,
+                })
+                .then((response) => {
+                    console.log('Response handleLike like: ', response);
+                    setLiked(true);
+                    getFeedData();
+                })
+                .catch((err) => console.error(err));
+        }
+    };
+
     useEffect(() => {
         getUserData(userId);
+        if (usersWhoLiked.includes(userId)) setLiked(true);
     }, []);
 
     return (
@@ -62,23 +100,22 @@ const FeedCard = ({
                         {story}
                     </p>
                 </div>
-                <span className='font-bold text-green-600'># tags</span>
+                <span className='font-bold text-green-600'>
+                    # TagsComingSoon!
+                </span>
             </section>
 
             <footer className='border-gray border-t-2 flex flex-row justify-between py-2'>
                 <span className='font-bold text-gray-800 text-sm tracking-tight'>
-                    223 Likes
+                    {likes !== 1 ? `${likes} likes` : `${likes} like`}
                 </span>
-                <div className='flex flex-row justify-between w-1/3'>
-                    <div>
-                        <Heart />
-                    </div>
-                    <div>
-                        <Chat />
-                    </div>
-                    <div>
-                        <Bookmark />
-                    </div>
+                <div className='flex flex-row justify-end w-1/3'>
+                    <button
+                        className='focus:outline-none'
+                        onClick={(e) => handleLikeClick(e, _id)}
+                    >
+                        <Heart liked={liked} />
+                    </button>
                 </div>
             </footer>
         </div>
