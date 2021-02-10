@@ -34,7 +34,13 @@ const Feed = () => {
                 {stories &&
                     stories.map((story) => {
                         // console.log('Story prop: ', story);
-                        return <FeedCard key={story._id} {...story} />;
+                        return (
+                            <FeedCard
+                                getFeedData={getFeedData}
+                                key={story._id}
+                                {...story}
+                            />
+                        );
                     })}
             </section>
         </div>

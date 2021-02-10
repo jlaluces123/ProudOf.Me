@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Chat, Heart, Bookmark } from './icons/index';
 import moment from 'moment';
 import axios from 'axios';
+import PreviousMap from 'postcss/lib/previous-map';
 
 const FeedCard = ({
     _id,
@@ -14,9 +15,11 @@ const FeedCard = ({
     photo,
     likes,
     usersWhoLiked,
+    getFeedData,
 }) => {
     const [user, setUser] = useState({});
-    const [likesCopy, setLikesCopy] = useState(likes);
+    const [modified, setModified] = useState();
+    const [liked, setLiked] = useState(false);
 
     const getUserData = (userId) => {
         axios
@@ -36,8 +39,9 @@ const FeedCard = ({
                     userId,
                 })
                 .then((response) => {
-                    console.log('Unliking post');
-                    setLikesCopy(likesCopy - 1);
+                    console.log('Response handleLike unlike: ', response);
+                    setLiked(false);
+                    getFeedData();
                 })
                 .catch((err) => console.error(err));
         } else {
@@ -47,8 +51,9 @@ const FeedCard = ({
                     userId,
                 })
                 .then((response) => {
-                    console.log(`User: ${userId} liked post #${momentId}`);
-                    setLikesCopy(likesCopy + 1);
+                    console.log('Response handleLike like: ', response);
+                    setLiked(true);
+                    getFeedData();
                 })
                 .catch((err) => console.error(err));
         }
@@ -56,6 +61,7 @@ const FeedCard = ({
 
     useEffect(() => {
         getUserData(userId);
+        if (usersWhoLiked.includes(userId)) setLiked(true);
     }, []);
 
     return (
@@ -101,16 +107,14 @@ const FeedCard = ({
 
             <footer className='border-gray border-t-2 flex flex-row justify-between py-2'>
                 <span className='font-bold text-gray-800 text-sm tracking-tight'>
-                    {likesCopy !== 1
-                        ? `${likesCopy} likes`
-                        : `${likesCopy} like`}
+                    {likes !== 1 ? `${likes} likes` : `${likes} like`}
                 </span>
                 <div className='flex flex-row justify-end w-1/3'>
                     <button
                         className='focus:outline-none'
                         onClick={(e) => handleLikeClick(e, _id)}
                     >
-                        <Heart />
+                        <Heart liked={liked} />
                     </button>
                 </div>
             </footer>
