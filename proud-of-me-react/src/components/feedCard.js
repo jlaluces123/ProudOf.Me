@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Chat, Heart, Bookmark } from './icons/index';
 import moment from 'moment';
@@ -12,14 +12,46 @@ const FeedCard = ({
     story,
     userId,
     photo,
+    likes,
+    usersWhoLiked,
 }) => {
     const [user, setUser] = useState({});
+    const [likesCopy, setLikesCopy] = useState(likes);
 
     const getUserData = (userId) => {
         axios
             .get(`http://localhost:3388/api/users/find/${userId}`)
             .then((data) => setUser(data.data))
             .catch((err) => console.error(err));
+    };
+
+    const handleLikeClick = (e, momentId) => {
+        e.preventDefault();
+
+        // Check if user is in usersWhoLiked array (aka. they already liked, now unliking post)
+        if (usersWhoLiked.includes(userId)) {
+            axios
+                .post(`http://localhost:3388/api/moments/${momentId}/likes`, {
+                    action: 'unlike',
+                    userId,
+                })
+                .then((response) => {
+                    console.log('Unliking post');
+                    setLikesCopy(likesCopy - 1);
+                })
+                .catch((err) => console.error(err));
+        } else {
+            axios
+                .post(`http://localhost:3388/api/moments/${momentId}/likes`, {
+                    action: 'like',
+                    userId,
+                })
+                .then((response) => {
+                    console.log(`User: ${userId} liked post #${momentId}`);
+                    setLikesCopy(likesCopy + 1);
+                })
+                .catch((err) => console.error(err));
+        }
     };
 
     useEffect(() => {
@@ -62,23 +94,24 @@ const FeedCard = ({
                         {story}
                     </p>
                 </div>
-                <span className='font-bold text-green-600'># tags</span>
+                <span className='font-bold text-green-600'>
+                    # TagsComingSoon!
+                </span>
             </section>
 
             <footer className='border-gray border-t-2 flex flex-row justify-between py-2'>
                 <span className='font-bold text-gray-800 text-sm tracking-tight'>
-                    223 Likes
+                    {likesCopy !== 1
+                        ? `${likesCopy} likes`
+                        : `${likesCopy} like`}
                 </span>
-                <div className='flex flex-row justify-between w-1/3'>
-                    <div>
+                <div className='flex flex-row justify-end w-1/3'>
+                    <button
+                        className='focus:outline-none'
+                        onClick={(e) => handleLikeClick(e, _id)}
+                    >
                         <Heart />
-                    </div>
-                    <div>
-                        <Chat />
-                    </div>
-                    <div>
-                        <Bookmark />
-                    </div>
+                    </button>
                 </div>
             </footer>
         </div>
