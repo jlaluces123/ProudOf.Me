@@ -28,7 +28,7 @@ const MomentForm = () => {
         <div className='mx-6'>
             <form action='POST' onSubmit={(e) => handleSubmit(e)}>
                 {/* X Button */}
-                <section className='flex items-center justify-end mt-6'>
+                <section className='flex items-center justify-end pt-6'>
                     <Link to={`/user/${id}/`}>
                         <svg
                             className='w-6 h-6'
