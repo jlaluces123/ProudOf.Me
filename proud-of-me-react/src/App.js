@@ -7,7 +7,7 @@ import Feed from './components/feed';
 
 function App() {
     return (
-        <div className='App bg-gray-100'>
+        <div className='App bg-gray-100 min-h-screen'>
             <Switch>
                 <Route exact path='/' component={Home} />
                 <Route path='/user/:userId/moments' component={MomentForm} />

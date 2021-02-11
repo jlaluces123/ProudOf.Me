@@ -57,7 +57,7 @@ const Profile = () => {
 
     return (
         <div>
-            {user ? (
+            {user && moments ? (
                 <div>
                     <Navigation user={user} username={user.username} />
                     <Mantra userId={user.googleId} />
