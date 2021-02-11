@@ -5,6 +5,9 @@ import Navigation from './navigation';
 import Mantra from './mantra';
 import { Link } from 'react-router-dom';
 import MomentList from './momentList';
+import FeedCard from './feedCard';
+
+import Plus from './icons/plus';
 
 const Profile = () => {
     const [id, setId] = useState();
@@ -58,10 +61,15 @@ const Profile = () => {
                 <div>
                     <Navigation user={user} username={user.username} />
                     <Mantra userId={user.googleId} />
-                    <Link to={`/user/${user.googleId}/moments`}>
-                        Record Your Victory
-                    </Link>
-                    <MomentList moments={moments} />
+                    <div className='shadow-2xl bg-indigo-400 flex font-medium items-center justify-center mx-12 p-4 rounded-full text-lg text-white'>
+                        <Plus />
+                        <Link to={`/user/${user.googleId}/moments`}>
+                            Record Your Victory!
+                        </Link>
+                    </div>
+                    {moments.map((moment) => {
+                        return <FeedCard key={moment._id} {...moment} />;
+                    })}
                 </div>
             ) : (
                 <h1>No User Found Yet</h1>
