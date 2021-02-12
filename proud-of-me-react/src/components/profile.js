@@ -63,15 +63,12 @@ const Profile = () => {
                     <Menu user={user} />
                     {/* <Mantra userId={user.googleId} /> */}
                     <div className='pt-20'>
-                        <div className='shadow-2xl bg-gray-700 flex font-medium items-center justify-center p-4 rounded-full text-lg text-white mx-auto  md:max-w-md lg:max-w-2xl'>
-                            <Plus />
-                            <Link
-                                className=''
-                                to={`/user/${user.googleId}/moments`}
-                            >
+                        <Link to={`/user/${user.googleId}/moments`}>
+                            <div className='cursor-pointer shadow-2xl bg-gray-700 flex font-medium items-center justify-center p-4 rounded-full text-lg text-white mx-auto  md:max-w-md lg:max-w-2xl'>
+                                <Plus />
                                 Record Your Victory!
-                            </Link>
-                        </div>
+                            </div>
+                        </Link>
                     </div>
                     <div className='py-4'>
                         <h3 className='ml-4 text-gray-700 text-xl font-semibold text-center'>
