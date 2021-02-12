@@ -8,6 +8,7 @@ import MomentList from './momentList';
 import FeedCard from './feedCard';
 
 import Plus from './icons/plus';
+import Menu from './menu';
 
 const Profile = () => {
     const [id, setId] = useState();
@@ -57,15 +58,22 @@ const Profile = () => {
 
     return (
         <div>
-            {user && moments ? (
+            {(user && moments) || moments == [] ? (
                 <div>
-                    <Navigation user={user} username={user.username} />
-                    <Mantra userId={user.googleId} />
-                    <div className='shadow-2xl bg-indigo-400 flex font-medium items-center justify-center mx-12 p-4 rounded-full text-lg text-white'>
-                        <Plus />
-                        <Link to={`/user/${user.googleId}/moments`}>
-                            Record Your Victory!
-                        </Link>
+                    <Menu user={user} />
+                    {/* <Mantra userId={user.googleId} /> */}
+                    <div className='pt-20'>
+                        <div className='shadow-2xl bg-gray-700 flex font-medium items-center justify-center mx-12 p-4 rounded-full text-lg text-white'>
+                            <Plus />
+                            <Link to={`/user/${user.googleId}/moments`}>
+                                Record Your Victory!
+                            </Link>
+                        </div>
+                    </div>
+                    <div className='py-4'>
+                        <h3 className='ml-4 text-gray-700 text-xl font-semibold'>
+                            Your Posts:{' '}
+                        </h3>
                     </div>
                     {moments.map((moment) => {
                         return <FeedCard key={moment._id} {...moment} />;
