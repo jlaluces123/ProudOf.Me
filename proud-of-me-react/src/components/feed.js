@@ -28,7 +28,7 @@ const Feed = () => {
         <div>
             <Menu />
 
-            <section className='flex flex-col items-center pt-20'>
+            <section className='flex flex-col items-center pt-20 mx-auto max-w-sm  md:max-w-md lg:max-w-lg'>
                 <h1 className='font-semibold text-2xl text-center text-gray-700 tracking-wide uppercase w-full'>
                     Discover
                 </h1>

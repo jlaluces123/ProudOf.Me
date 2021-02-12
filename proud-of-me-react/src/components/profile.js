@@ -40,7 +40,7 @@ const Profile = () => {
                             console.log('mounted');
                             console.log(resOne.data.user);
                             setUser(resOne.data.user);
-                            setMoments(resTwo.data);
+                            setMoments(resTwo.data.reverse());
                         }
                     })
                 )
@@ -63,21 +63,26 @@ const Profile = () => {
                     <Menu user={user} />
                     {/* <Mantra userId={user.googleId} /> */}
                     <div className='pt-20'>
-                        <div className='shadow-2xl bg-gray-700 flex font-medium items-center justify-center mx-12 p-4 rounded-full text-lg text-white'>
+                        <div className='shadow-2xl bg-gray-700 flex font-medium items-center justify-center p-4 rounded-full text-lg text-white mx-auto  md:max-w-md lg:max-w-2xl'>
                             <Plus />
-                            <Link to={`/user/${user.googleId}/moments`}>
+                            <Link
+                                className=''
+                                to={`/user/${user.googleId}/moments`}
+                            >
                                 Record Your Victory!
                             </Link>
                         </div>
                     </div>
                     <div className='py-4'>
-                        <h3 className='ml-4 text-gray-700 text-xl font-semibold'>
+                        <h3 className='ml-4 text-gray-700 text-xl font-semibold text-center'>
                             Your Posts:{' '}
                         </h3>
                     </div>
-                    {moments.map((moment) => {
-                        return <FeedCard key={moment._id} {...moment} />;
-                    })}
+                    <div className='mx-auto max-w-sm  md:max-w-md lg:max-w-2xl'>
+                        {moments.map((moment) => {
+                            return <FeedCard key={moment._id} {...moment} />;
+                        })}
+                    </div>
                 </div>
             ) : (
                 <h1>No User Found Yet</h1>

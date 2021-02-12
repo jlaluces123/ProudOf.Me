@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import '../assets/custom.css';
+
 const MomentForm = () => {
     const [title, setTitle] = useState('');
     const [story, setStory] = useState('');
     const [id, setId] = useState('');
+    const [isPublic, setIsPublic] = useState(false);
 
     useEffect(() => {
         let url = window.location.pathname;
@@ -13,14 +16,22 @@ const MomentForm = () => {
         setId(url.split('/')[2]);
     }, []);
 
+    useEffect(() => {
+        console.log('Is Public: ', isPublic);
+    }, [isPublic]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
             .post(`http://localhost:3388/api/user/${id}/moments`, {
                 title,
                 story,
+                public: isPublic,
             })
-            .then((data) => console.log(data))
+            .then((data) => {
+                console.log(data);
+                window.location = `/user/${id}`;
+            })
             .catch((err) => console.error(err));
     };
 
@@ -84,6 +95,31 @@ const MomentForm = () => {
                         name='story'
                     />
                 </section>
+
+                <div className='my-4 flex flex-row w-full items-center justify-between'>
+                    <div className='flex flex-col w-2/3'>
+                        <label
+                            htmlFor='collab-switch'
+                            className='block text-md font-medium text-gray-700 mb-1'
+                        >
+                            Public
+                        </label>
+                        <p className='text-sm text-gray-600'>
+                            Allow other users to read your stories to get
+                            inspired!
+                        </p>
+                    </div>
+
+                    <label id='collab-switch' className='switch'>
+                        <input
+                            className='switch-input'
+                            type='checkbox'
+                            onClick={(e) => setIsPublic(!isPublic)}
+                        />
+                        <span className='slider round'></span>
+                    </label>
+                </div>
+
                 <button
                     className='p-2 bg-green-500 rounded text-white'
                     onSubmit={(e) => handleSubmit(e)}
