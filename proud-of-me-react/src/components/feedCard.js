@@ -109,7 +109,14 @@ const FeedCard = ({
                 <span className='font-bold text-gray-800 text-sm tracking-tight'>
                     {likes !== 1 ? `${likes} likes` : `${likes} like`}
                 </span>
-                <div className='flex flex-row justify-end w-1/3'>
+
+                <div
+                    className={
+                        window.location.pathname.split('/')[1] !== 'user'
+                            ? 'flex flex-row justify-end w-1/3'
+                            : 'hidden'
+                    }
+                >
                     <button
                         className='focus:outline-none'
                         onClick={(e) => handleLikeClick(e, _id)}
