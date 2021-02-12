@@ -8,6 +8,7 @@ import MomentList from './momentList';
 import FeedCard from './feedCard';
 
 import Plus from './icons/plus';
+import Menu from './menu';
 
 const Profile = () => {
     const [id, setId] = useState();
@@ -39,7 +40,7 @@ const Profile = () => {
                             console.log('mounted');
                             console.log(resOne.data.user);
                             setUser(resOne.data.user);
-                            setMoments(resTwo.data);
+                            setMoments(resTwo.data.reverse());
                         }
                     })
                 )
@@ -57,19 +58,28 @@ const Profile = () => {
 
     return (
         <div>
-            {user && moments ? (
+            {(user && moments) || moments == [] ? (
                 <div>
-                    <Navigation user={user} username={user.username} />
-                    <Mantra userId={user.googleId} />
-                    <div className='shadow-2xl bg-indigo-400 flex font-medium items-center justify-center mx-12 p-4 rounded-full text-lg text-white'>
-                        <Plus />
+                    <Menu user={user} />
+                    {/* <Mantra userId={user.googleId} /> */}
+                    <div className='pt-20'>
                         <Link to={`/user/${user.googleId}/moments`}>
-                            Record Your Victory!
+                            <div className='cursor-pointer shadow-2xl bg-gray-700 flex font-medium items-center justify-center p-4 rounded-full text-lg text-white mx-auto  md:max-w-md lg:max-w-2xl'>
+                                <Plus />
+                                Record Your Victory!
+                            </div>
                         </Link>
                     </div>
-                    {moments.map((moment) => {
-                        return <FeedCard key={moment._id} {...moment} />;
-                    })}
+                    <div className='py-4'>
+                        <h3 className='ml-4 text-gray-700 text-xl font-semibold text-center'>
+                            Your Posts:{' '}
+                        </h3>
+                    </div>
+                    <div className='mx-auto max-w-sm  md:max-w-md lg:max-w-2xl'>
+                        {moments.map((moment) => {
+                            return <FeedCard key={moment._id} {...moment} />;
+                        })}
+                    </div>
                 </div>
             ) : (
                 <h1>No User Found Yet</h1>

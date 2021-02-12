@@ -4,6 +4,7 @@ import Profile from './components/profile';
 import Login from './components/login';
 import MomentForm from './components/momentForm';
 import Feed from './components/feed';
+import Menu from './components/menu';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Route path='/user/:userId/feed' component={Feed} />
                 <Route path='/user/:userId' component={Profile} />
                 <Route path='/login' component={Login} />
+                <Route path='/test' component={Menu} />
             </Switch>
         </div>
     );

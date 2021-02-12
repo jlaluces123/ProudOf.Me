@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FeedCard from './feedCard';
 import Home from './icons/home';
+import Menu from './menu';
 
 /* 
     This component will:
@@ -25,15 +26,12 @@ const Feed = () => {
 
     return (
         <div>
-            <section className='bg-white border-b fixed flex font-bold h-16 items-center justify-between left-0 px-6 shadow-lg text-gray-800 text-lg top-0 tracking-wide uppercase w-full'>
-                <div>
-                    <Home />
-                </div>
-                <h1>Discover</h1>
-                <div className='w-6 h-6' />
-            </section>
+            <Menu />
 
-            <section className='flex flex-col items-center mt-16'>
+            <section className='flex flex-col items-center pt-20 mx-auto max-w-sm  md:max-w-md lg:max-w-lg'>
+                <h1 className='font-semibold text-2xl text-center text-gray-700 tracking-wide uppercase w-full'>
+                    Discover
+                </h1>
                 {stories &&
                     stories.map((story) => {
                         // console.log('Story prop: ', story);
