@@ -112,7 +112,7 @@ const FeedCard = ({
 
                 <div
                     className={
-                        window.location.pathname.split('/')[1] !== 'user'
+                        window.location.pathname.split('/')[3]
                             ? 'flex flex-row justify-end w-1/3'
                             : 'hidden'
                     }
