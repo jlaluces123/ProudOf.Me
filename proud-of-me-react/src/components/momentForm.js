@@ -36,7 +36,7 @@ const MomentForm = () => {
     };
 
     return (
-        <div className='mx-6'>
+        <div className='mx-6 lg:flex lg:flex-col lg:h-screen lg:items-center lg:justify-center'>
             <form action='POST' onSubmit={(e) => handleSubmit(e)}>
                 {/* X Button */}
                 <section className='flex items-center justify-end pt-6'>

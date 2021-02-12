@@ -42,25 +42,25 @@ const Menu = () => {
                 >
                     <Link
                         to={`/user/${googleId}`}
-                        className='font-medium text-lg mt-4 mb-2 lg:font-normal lg:text-sm lg:mt-0 lg:ml-4'
+                        className='font-medium text-lg mt-4 mb-2 lg:mb-0 lg:font-normal lg:text-sm lg:mt-0 lg:ml-4'
                     >
                         <span>Home</span>
                     </Link>
                     <Link
                         to={`/user/${googleId}/feed`}
-                        className='font-medium text-lg my-2 lg:font-normal lg:text-sm lg:mt-0 lg:ml-4'
+                        className='font-medium text-lg my-2 lg:my-0 lg:font-normal lg:text-sm lg:mt-0 lg:ml-4'
                     >
                         <span>Discover</span>
                     </Link>
                     <Link
                         to={`/user/${googleId}/moments`}
-                        className='font-medium text-lg my-2 lg:font-normal lg:text-sm lg:mt-0 lg:ml-4'
+                        className='font-medium text-lg my-2 lg:my-0 lg:font-normal lg:text-sm lg:mt-0 lg:ml-4'
                     >
                         <span>Create</span>
                     </Link>
                     <Link
                         to='/'
-                        className='font-medium text-lg my-2 lg:font-normal lg:text-sm lg:mt-0 lg:ml-4'
+                        className='font-medium text-lg my-2 lg:my-0 lg:font-normal lg:text-sm lg:mt-0 lg:ml-4'
                     >
                         <span>Sign Out</span>
                     </Link>
