@@ -7,7 +7,9 @@ const Mantra = (props) => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:3388/api/user/${props.userId}/mantra`)
+            .get(
+                `https://proud-of-me-backend.herokuapp.com/api/user/${props.userId}/mantra`
+            )
             .then((res) => {
                 // res.data --> {mantra: 'some mantra'}
                 if (res.data.mantra !== '') {
@@ -25,9 +27,12 @@ const Mantra = (props) => {
         e.preventDefault();
 
         axios
-            .post(`http://localhost:3388/api/user/${props.userId}/mantra`, {
-                mantra,
-            })
+            .post(
+                `https://proud-of-me-backend.herokuapp.com/api/user/${props.userId}/mantra`,
+                {
+                    mantra,
+                }
+            )
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
     };

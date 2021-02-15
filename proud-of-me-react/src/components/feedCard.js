@@ -23,7 +23,9 @@ const FeedCard = ({
 
     const getUserData = (userId) => {
         axios
-            .get(`http://localhost:3388/api/users/find/${userId}`)
+            .get(
+                `https://proud-of-me-backend.herokuapp.com/api/users/find/${userId}`
+            )
             .then((data) => setUser(data.data))
             .catch((err) => console.error(err));
     };
@@ -34,10 +36,13 @@ const FeedCard = ({
         // Check if user is in usersWhoLiked array (aka. they already liked, now unliking post)
         if (usersWhoLiked.includes(userId)) {
             axios
-                .post(`http://localhost:3388/api/moments/${momentId}/likes`, {
-                    action: 'unlike',
-                    userId,
-                })
+                .post(
+                    `https://proud-of-me-backend.herokuapp.com/api/moments/${momentId}/likes`,
+                    {
+                        action: 'unlike',
+                        userId,
+                    }
+                )
                 .then((response) => {
                     console.log('Response handleLike unlike: ', response);
                     setLiked(false);
@@ -46,10 +51,13 @@ const FeedCard = ({
                 .catch((err) => console.error(err));
         } else {
             axios
-                .post(`http://localhost:3388/api/moments/${momentId}/likes`, {
-                    action: 'like',
-                    userId,
-                })
+                .post(
+                    `https://proud-of-me-backend.herokuapp.com/api/moments/${momentId}/likes`,
+                    {
+                        action: 'like',
+                        userId,
+                    }
+                )
                 .then((response) => {
                     console.log('Response handleLike like: ', response);
                     setLiked(true);

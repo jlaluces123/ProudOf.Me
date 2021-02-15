@@ -23,11 +23,14 @@ const MomentForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post(`http://localhost:3388/api/user/${id}/moments`, {
-                title,
-                story,
-                public: isPublic,
-            })
+            .post(
+                `https://proud-of-me-backend.herokuapp.com/api/user/${id}/moments`,
+                {
+                    title,
+                    story,
+                    public: isPublic,
+                }
+            )
             .then((data) => {
                 console.log(data);
                 window.location = `/user/${id}`;

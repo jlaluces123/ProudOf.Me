@@ -15,7 +15,7 @@ const Feed = () => {
 
     const getFeedData = () => {
         axios
-            .get('http://localhost:3388/api/users/feed')
+            .get('https://proud-of-me-backend.herokuapp.com/api/users/feed')
             .then((data) => setStories(data.data.moments.reverse()))
             .catch((err) => console.error(err));
     };
