@@ -5,6 +5,7 @@ import moment from 'moment';
 import axios from 'axios';
 import PreviousMap from 'postcss/lib/previous-map';
 
+// !Issue: Getting User Data for Profile is now bugged
 const FeedCard = ({
     _id,
     createdAt,
@@ -16,17 +17,21 @@ const FeedCard = ({
     likes,
     usersWhoLiked,
     getFeedData,
+    currentUser,
 }) => {
-    const [user, setUser] = useState({});
+    const [userCardData, setUserCardData] = useState({});
     const [modified, setModified] = useState();
     const [liked, setLiked] = useState(false);
 
-    const getUserData = (userId) => {
+    const getUserDataForCard = (userId) => {
         axios
             .get(
                 `https://proud-of-me-backend.herokuapp.com/api/users/find/${userId}`
             )
-            .then((data) => setUser(data.data))
+            .then((data) => {
+                console.log(data.data);
+                setUserCardData(data.data);
+            })
             .catch((err) => console.error(err));
     };
 
@@ -34,13 +39,13 @@ const FeedCard = ({
         e.preventDefault();
 
         // Check if user is in usersWhoLiked array (aka. they already liked, now unliking post)
-        if (usersWhoLiked.includes(userId)) {
+        if (usersWhoLiked.includes(currentUser._id)) {
             axios
                 .post(
                     `https://proud-of-me-backend.herokuapp.com/api/moments/${momentId}/likes`,
                     {
                         action: 'unlike',
-                        userId,
+                        userId: currentUser._id,
                     }
                 )
                 .then((response) => {
@@ -55,7 +60,7 @@ const FeedCard = ({
                     `https://proud-of-me-backend.herokuapp.com/api/moments/${momentId}/likes`,
                     {
                         action: 'like',
-                        userId,
+                        userId: currentUser._id,
                     }
                 )
                 .then((response) => {
@@ -67,9 +72,16 @@ const FeedCard = ({
         }
     };
 
-    useEffect(() => {
-        getUserData(userId);
-        if (usersWhoLiked.includes(userId)) setLiked(true);
+    useEffect(async () => {
+        if (usersWhoLiked.includes(currentUser._id)) {
+            console.log(
+                `Current User ${currentUser._id} already liked: ${usersWhoLiked}`
+            );
+            setLiked(true);
+        } else {
+            setLiked(false);
+        }
+        getUserDataForCard(userId);
     }, []);
 
     return (
@@ -77,10 +89,10 @@ const FeedCard = ({
             <header className='flex flex-row justify-between items-center'>
                 <div className='flex flex-row items-center'>
                     <div>
-                        {user.photo ? (
+                        {userCardData.photo ? (
                             <img
                                 className='h-10 w-10 rounded-full'
-                                src={`${user.photo}`}
+                                src={`${userCardData.photo}`}
                                 alt='User Profile Picture'
                             />
                         ) : (
@@ -91,7 +103,7 @@ const FeedCard = ({
                         to={`/profile/${userId}`}
                         className='font-bold ml-2 text-gray-800'
                     >
-                        {user.username}
+                        {userCardData.username}
                     </Link>
                 </div>
                 <span className='text-gray-400 text-xs font-semibold tracking-wider'>

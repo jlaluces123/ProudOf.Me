@@ -12,6 +12,23 @@ import Menu from './menu';
 */
 const Feed = () => {
     const [stories, setStories] = useState([]);
+    const [user, setUser] = useState({});
+
+    const getCurrentUser = async () => {
+        let url = window.location.pathname;
+        url.split('/');
+        let userGoogleId = url.split('/')[2];
+
+        await axios
+            .get(
+                `https://proud-of-me-backend.herokuapp.com/api/user/${userGoogleId}`
+            )
+            .then((user) => {
+                console.log('User Data: ', user);
+                setUser(user.data.user);
+            })
+            .catch((err) => console.error(err));
+    };
 
     const getFeedData = () => {
         axios
@@ -21,6 +38,7 @@ const Feed = () => {
     };
 
     useEffect(() => {
+        getCurrentUser();
         getFeedData();
     }, []);
 
@@ -37,6 +55,7 @@ const Feed = () => {
                         // console.log('Story prop: ', story);
                         return (
                             <FeedCard
+                                currentUser={user}
                                 getFeedData={getFeedData}
                                 key={story._id}
                                 {...story}

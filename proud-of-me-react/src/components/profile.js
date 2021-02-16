@@ -35,12 +35,8 @@ const Profile = () => {
                 ])
                 .then(
                     axios.spread((resOne, resTwo) => {
-                        console.log('Respone One: ', resOne);
-                        console.log('Response Two: ', resTwo);
-
                         if (mounted) {
                             console.log('mounted');
-                            console.log(resOne.data.user);
                             setUser(resOne.data.user);
                             setMoments(resTwo.data.reverse());
                         }
@@ -62,7 +58,7 @@ const Profile = () => {
         <div>
             {(user && moments) || moments == [] ? (
                 <div>
-                    <Menu user={user} />
+                    <Menu />
                     {/* <Mantra userId={user.googleId} /> */}
                     <div className='pt-20'>
                         <Link to={`/user/${user.googleId}/moments`}>
@@ -79,7 +75,13 @@ const Profile = () => {
                     </div>
                     <div className='mx-auto max-w-sm  md:max-w-md lg:max-w-2xl'>
                         {moments.map((moment) => {
-                            return <FeedCard key={moment._id} {...moment} />;
+                            return (
+                                <FeedCard
+                                    currentUser={user}
+                                    key={moment._id}
+                                    {...moment}
+                                />
+                            );
                         })}
                     </div>
                 </div>
