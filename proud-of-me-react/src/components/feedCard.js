@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Chat, Heart, Bookmark } from './icons/index';
+import { Heart } from './icons/index';
 import moment from 'moment';
 import axios from 'axios';
-import PreviousMap from 'postcss/lib/previous-map';
 
 // !Issue: Getting User Data for Profile is now bugged
 const FeedCard = ({
@@ -20,7 +19,6 @@ const FeedCard = ({
     currentUser,
 }) => {
     const [userCardData, setUserCardData] = useState({});
-    const [modified, setModified] = useState();
     const [liked, setLiked] = useState(false);
 
     const getUserDataForCard = async (userId) => {
@@ -29,7 +27,6 @@ const FeedCard = ({
                 `https://proud-of-me-backend.herokuapp.com/api/users/find/${userId}`
             )
             .then((data) => {
-                console.log('Data.data', data.data);
                 setUserCardData(data.data);
             })
             .catch((err) => console.error(err));
@@ -49,7 +46,6 @@ const FeedCard = ({
                     }
                 )
                 .then((response) => {
-                    console.log('Response handleLike unlike: ', response);
                     setLiked(false);
                     getFeedData();
                 })
@@ -64,7 +60,6 @@ const FeedCard = ({
                     }
                 )
                 .then((response) => {
-                    console.log('Response handleLike like: ', response);
                     setLiked(true);
                     getFeedData();
                 })
@@ -72,17 +67,19 @@ const FeedCard = ({
         }
     };
 
+    const checkUserLiked = async () => {
+        if (usersWhoLiked.includes(currentUser._id)) return setLiked(true);
+        return setLiked(false);
+    };
+
     useEffect(async () => {
-        if (usersWhoLiked.includes(currentUser._id)) {
-            console.log(
-                `Current User ${currentUser._id} already liked: ${usersWhoLiked}`
-            );
-            setLiked(true);
-        } else {
-            setLiked(false);
-        }
+        checkUserLiked();
         getUserDataForCard(userId);
     }, []);
+
+    useEffect(() => {
+        checkUserLiked();
+    }, [currentUser]);
 
     return (
         <div className='bg-white flex flex-col h-60 justify-between my-4 pt-4 px-4 shadow-md w-full'>
