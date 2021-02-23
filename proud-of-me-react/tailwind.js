@@ -9,6 +9,16 @@ module.exports = {
             width: {
                 49: '49%',
             },
+            keyframes: {
+                pulse: {
+                    '0%, 100%': {
+                        opacity: 1,
+                    },
+                    '50%': {
+                        opacity: 0,
+                    },
+                },
+            },
         },
         screens: {
             sm: '640px',

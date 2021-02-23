@@ -3,6 +3,7 @@ import axios from 'axios';
 import FeedCard from './feedCard';
 import Home from './icons/home';
 import Menu from './menu';
+import SkeletonFeedCard from './skeletonFeedCard';
 
 /* 
     This component will:
@@ -13,6 +14,8 @@ import Menu from './menu';
 const Feed = () => {
     const [stories, setStories] = useState([]);
     const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(true);
+    const fakeArr = [1, 2];
 
     const getCurrentUser = async () => {
         let url = window.location.pathname;
@@ -24,22 +27,22 @@ const Feed = () => {
                 `https://proud-of-me-backend.herokuapp.com/api/user/${userGoogleId}`
             )
             .then((user) => {
-                console.log('User Data: ', user);
                 setUser(user.data.userFound);
             })
             .catch((err) => console.error(err));
     };
 
-    const getFeedData = () => {
-        axios
+    const getFeedData = async () => {
+        await axios
             .get('https://proud-of-me-backend.herokuapp.com/api/users/feed')
             .then((data) => setStories(data.data.moments.reverse()))
             .catch((err) => console.error(err));
     };
 
-    useEffect(() => {
-        getCurrentUser();
-        getFeedData();
+    useEffect(async () => {
+        await getCurrentUser();
+        await getFeedData();
+        setLoading(false);
     }, []);
 
     return (
@@ -50,18 +53,21 @@ const Feed = () => {
                 <h1 className='font-semibold text-2xl text-center text-gray-700 tracking-wide uppercase w-full'>
                     Discover
                 </h1>
-                {stories &&
-                    stories.map((story) => {
-                        // console.log('Story prop: ', story);
-                        return (
-                            <FeedCard
-                                currentUser={user}
-                                getFeedData={getFeedData}
-                                key={story._id}
-                                {...story}
-                            />
-                        );
-                    })}
+                {!loading
+                    ? stories.map((story) => {
+                          // console.log('Story prop: ', story);
+                          return (
+                              <FeedCard
+                                  currentUser={user}
+                                  getFeedData={getFeedData}
+                                  key={story._id}
+                                  {...story}
+                              />
+                          );
+                      })
+                    : fakeArr.map((ele) => {
+                          return <SkeletonFeedCard key={ele} />;
+                      })}
             </section>
         </div>
     );

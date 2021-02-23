@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import Navigation from './navigation';
-import Mantra from './mantra';
 import { Link } from 'react-router-dom';
-import MomentList from './momentList';
 import FeedCard from './feedCard';
 
 import Plus from './icons/plus';
 import Menu from './menu';
 
 const Profile = () => {
-    const [id, setId] = useState();
     const [user, setUser] = useState();
     const [moments, setMoments] = useState();
 
@@ -22,8 +18,6 @@ const Profile = () => {
         let mounted = true;
 
         async function getProfile() {
-            console.log(userId);
-
             await axios
                 .all([
                     axios.get(
@@ -36,7 +30,6 @@ const Profile = () => {
                 .then(
                     axios.spread((resOne, resTwo) => {
                         if (mounted) {
-                            console.log('mounted', resOne, resTwo);
                             setUser(resOne.data.userFound);
                             setMoments(resTwo.data.reverse());
                         }
@@ -50,14 +43,9 @@ const Profile = () => {
         return () => (mounted = false);
     }, []);
 
-    useEffect(() => {
-        console.log('User object updated: ', user);
-        console.log(user, moments);
-    }, [user]);
-
     return (
         <div>
-            {(user && moments) || moments == [] ? (
+            {(user && moments) || moments === [] ? (
                 <div>
                     <Menu />
                     {/* <Mantra userId={user.googleId} /> */}

@@ -19,10 +19,6 @@ const Menu = () => {
         }
     }, []);
 
-    useEffect(() => {
-        console.log('Google Id: ', googleId);
-    }, [googleId]);
-
     return (
         <nav className='flex items-center bg-gray-700 p-4 flex-wrap fixed w-full'>
             <Link
