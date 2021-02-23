@@ -23,24 +23,24 @@ const FeedCard = ({
     const [modified, setModified] = useState();
     const [liked, setLiked] = useState(false);
 
-    const getUserDataForCard = (userId) => {
-        axios
+    const getUserDataForCard = async (userId) => {
+        await axios
             .get(
                 `https://proud-of-me-backend.herokuapp.com/api/users/find/${userId}`
             )
             .then((data) => {
-                console.log(data.data);
+                console.log('Data.data', data.data);
                 setUserCardData(data.data);
             })
             .catch((err) => console.error(err));
     };
 
-    const handleLikeClick = (e, momentId) => {
+    const handleLikeClick = async (e, momentId) => {
         e.preventDefault();
 
         // Check if user is in usersWhoLiked array (aka. they already liked, now unliking post)
         if (usersWhoLiked.includes(currentUser._id)) {
-            axios
+            await axios
                 .post(
                     `https://proud-of-me-backend.herokuapp.com/api/moments/${momentId}/likes`,
                     {
@@ -55,7 +55,7 @@ const FeedCard = ({
                 })
                 .catch((err) => console.error(err));
         } else {
-            axios
+            await axios
                 .post(
                     `https://proud-of-me-backend.herokuapp.com/api/moments/${momentId}/likes`,
                     {

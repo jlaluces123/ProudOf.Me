@@ -36,8 +36,8 @@ const Profile = () => {
                 .then(
                     axios.spread((resOne, resTwo) => {
                         if (mounted) {
-                            console.log('mounted');
-                            setUser(resOne.data.user);
+                            console.log('mounted', resOne, resTwo);
+                            setUser(resOne.data.userFound);
                             setMoments(resTwo.data.reverse());
                         }
                     })
@@ -52,6 +52,7 @@ const Profile = () => {
 
     useEffect(() => {
         console.log('User object updated: ', user);
+        console.log(user, moments);
     }, [user]);
 
     return (

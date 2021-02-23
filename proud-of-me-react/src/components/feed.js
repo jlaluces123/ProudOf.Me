@@ -25,7 +25,7 @@ const Feed = () => {
             )
             .then((user) => {
                 console.log('User Data: ', user);
-                setUser(user.data.user);
+                setUser(user.data.userFound);
             })
             .catch((err) => console.error(err));
     };
