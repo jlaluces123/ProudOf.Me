@@ -27,7 +27,7 @@ const FeedCard = ({
                 `https://proud-of-me-backend.herokuapp.com/api/users/find/${userId}`
             )
             .then((data) => {
-                setUserCardData(data.data);
+                setUserCardData(data.data.user);
             })
             .catch((err) => console.error(err));
     };
@@ -79,6 +79,7 @@ const FeedCard = ({
 
     useEffect(() => {
         checkUserLiked();
+        console.log(currentUser);
     }, [currentUser]);
 
     return (
@@ -97,7 +98,7 @@ const FeedCard = ({
                         )}
                     </div>
                     <Link
-                        to={`/profile/${userId}`}
+                        to={`/${currentUser.googleId}/profile/${userId}`}
                         className='font-bold ml-2 text-gray-800 hover:underline'
                     >
                         {userCardData.username}

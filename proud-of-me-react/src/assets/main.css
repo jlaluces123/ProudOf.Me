@@ -29116,16 +29116,6 @@ video {
   }
 }
 
-@keyframes grow {
-  0%, 100% {
-    transform: scale(1.1);
-  }
-
-  50% {
-    transform: scale(1.05);
-  }
-}
-
 .animate-none {
   animation: none;
 }
@@ -29144,10 +29134,6 @@ video {
 
 .animate-bounce {
   animation: bounce 1s infinite;
-}
-
-.animate-grow {
-  animation: grow .3s ease-in-out;
 }
 
 .line-clamp-1 {
@@ -57747,10 +57733,6 @@ video {
 
   .sm\:animate-bounce {
     animation: bounce 1s infinite;
-  }
-
-  .sm\:animate-grow {
-    animation: grow .3s ease-in-out;
   }
 
   .sm\:line-clamp-1 {
@@ -86353,10 +86335,6 @@ video {
     animation: bounce 1s infinite;
   }
 
-  .md\:animate-grow {
-    animation: grow .3s ease-in-out;
-  }
-
   .md\:line-clamp-1 {
     overflow: hidden;
     display: -webkit-box;
@@ -114955,10 +114933,6 @@ video {
 
   .lg\:animate-bounce {
     animation: bounce 1s infinite;
-  }
-
-  .lg\:animate-grow {
-    animation: grow .3s ease-in-out;
   }
 
   .lg\:line-clamp-1 {
@@ -143561,10 +143535,6 @@ video {
     animation: bounce 1s infinite;
   }
 
-  .xl\:animate-grow {
-    animation: grow .3s ease-in-out;
-  }
-
   .xl\:line-clamp-1 {
     overflow: hidden;
     display: -webkit-box;
@@ -172163,10 +172133,6 @@ video {
 
   .\32xl\:animate-bounce {
     animation: bounce 1s infinite;
-  }
-
-  .\32xl\:animate-grow {
-    animation: grow .3s ease-in-out;
   }
 
   .\32xl\:line-clamp-1 {
