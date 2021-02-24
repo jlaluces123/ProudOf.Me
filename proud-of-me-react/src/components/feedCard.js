@@ -82,7 +82,7 @@ const FeedCard = ({
     }, [currentUser]);
 
     return (
-        <div className='bg-white flex flex-col h-60 justify-between my-4 pt-4 px-4 shadow-md w-full'>
+        <div className='bg-white flex flex-col h-60 justify-between my-4 pt-4 px-4 shadow-md w-full rounded hover:scale-110 transform duration-300 ease-in-out cursor-pointer hover:shadow-2xl'>
             <header className='flex flex-row justify-between items-center'>
                 <div className='flex flex-row items-center'>
                     <div>
@@ -98,7 +98,7 @@ const FeedCard = ({
                     </div>
                     <Link
                         to={`/profile/${userId}`}
-                        className='font-bold ml-2 text-gray-800'
+                        className='font-bold ml-2 text-gray-800 hover:underline'
                     >
                         {userCardData.username}
                     </Link>
