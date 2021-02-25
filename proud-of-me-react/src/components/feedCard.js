@@ -27,7 +27,7 @@ const FeedCard = ({
                 `https://proud-of-me-backend.herokuapp.com/api/users/find/${userId}`
             )
             .then((data) => {
-                setUserCardData(data.data);
+                setUserCardData(data.data.user);
             })
             .catch((err) => console.error(err));
     };
@@ -79,10 +79,11 @@ const FeedCard = ({
 
     useEffect(() => {
         checkUserLiked();
+        console.log(currentUser);
     }, [currentUser]);
 
     return (
-        <div className='bg-white flex flex-col h-60 justify-between my-4 pt-4 px-4 shadow-md w-full'>
+        <div className='bg-white flex flex-col h-60 justify-between my-4 pt-4 px-4 shadow-md w-full rounded hover:scale-110 transform duration-300 ease-in-out cursor-pointer hover:shadow-2xl'>
             <header className='flex flex-row justify-between items-center'>
                 <div className='flex flex-row items-center'>
                     <div>
@@ -97,8 +98,8 @@ const FeedCard = ({
                         )}
                     </div>
                     <Link
-                        to={`/profile/${userId}`}
-                        className='font-bold ml-2 text-gray-800'
+                        to={`/${currentUser.googleId}/profile/${userId}`}
+                        className='font-bold ml-2 text-gray-800 hover:underline'
                     >
                         {userCardData.username}
                     </Link>
@@ -129,7 +130,7 @@ const FeedCard = ({
 
                 <div
                     className={
-                        window.location.pathname.split('/')[3]
+                        window.location.pathname.split('/')[3] === 'feed'
                             ? 'flex flex-row justify-end w-1/3'
                             : 'hidden'
                     }
