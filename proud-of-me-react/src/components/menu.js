@@ -20,7 +20,7 @@ const Menu = () => {
     }, []);
 
     return (
-        <nav className='flex items-center bg-gray-700 p-4 flex-wrap fixed w-full'>
+        <nav className='flex items-center bg-gray-700 p-4 flex-wrap fixed w-full z-10 shadow-sm'>
             <Link
                 to={home === true ? `/` : `/user/${googleId}`}
                 className='text-white text-lg font-semibold tracking-wide cursor-pointer'

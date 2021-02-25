@@ -83,7 +83,12 @@ const FeedCard = ({
     }, [currentUser]);
 
     return (
-        <div className='bg-white flex flex-col h-60 justify-between my-4 pt-4 px-4 shadow-md w-full rounded hover:scale-110 transform duration-300 ease-in-out cursor-pointer hover:shadow-2xl'>
+        <div
+            onClick={(e) =>
+                (window.location.href = `/view/${currentUser.googleId}/moment/${_id}`)
+            }
+            className='bg-white flex flex-col h-60 justify-between my-4 pt-4 px-4 shadow-md w-full rounded hover:scale-110 transform duration-300 ease-in-out cursor-pointer hover:shadow-2xl'
+        >
             <header className='flex flex-row justify-between items-center'>
                 <div className='flex flex-row items-center'>
                     <div>
