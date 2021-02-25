@@ -130,7 +130,7 @@ const FeedCard = ({
 
                 <div
                     className={
-                        window.location.pathname.split('/')[3]
+                        window.location.pathname.split('/')[3] === 'feed'
                             ? 'flex flex-row justify-end w-1/3'
                             : 'hidden'
                     }

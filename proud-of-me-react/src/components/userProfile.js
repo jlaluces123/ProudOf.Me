@@ -56,15 +56,21 @@ const UserProfile = () => {
             {!loading ? (
                 <div className='flex flex-col'>
                     <header className='flex flex-row justify-between pt-6 px-6 bg-white'>
-                        <Link to={lastLocation.pathname}>
+                        <Link
+                            to={
+                                lastLocation
+                                    ? lastLocation.pathname
+                                    : `/user/${user.googleId}/feed`
+                            }
+                        >
                             <Back />
                         </Link>
                         <div></div>
                     </header>
                     <section className='bg-white'>
-                        <div className='my-10 h-20 flex flex-col items-center justify-center'>
+                        <div className='my-6 h-20 flex flex-col items-center justify-center'>
                             <img
-                                className='capitalize rounded-full h-16 w-16'
+                                className='capitalize rounded-full h-16 w-16 mb-2'
                                 src={otherUser.photo}
                                 alt={`Profile photo for ${otherUser.username}`}
                             />
@@ -100,7 +106,9 @@ const UserProfile = () => {
                     </section>
 
                     <section className='my-4'>
-                        <h1 className='font-semibold text-md'>Their Posts</h1>
+                        {/* <h1 className='font-semibold text-md bg-white'>
+                            Their Posts
+                        </h1> */}
                         {publicPosts.map((post) => {
                             return (
                                 <FeedCard
