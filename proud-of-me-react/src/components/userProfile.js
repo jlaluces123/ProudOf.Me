@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import FeedCard from './feedCard';
+import Back from './icons/back';
+import { useLastLocation } from 'react-router-last-location';
+import { Link } from 'react-router-dom';
 
 const UserProfile = () => {
     const [otherUser, setOtherUser] = useState();
     const [user, setUser] = useState();
     const [publicPosts, setPublicPosts] = useState();
     const [loading, setLoading] = useState(true);
+    const lastLocation = useLastLocation();
 
     const getCurrentUser = async () => {
         let url = window.location.pathname;
@@ -39,6 +43,7 @@ const UserProfile = () => {
     useEffect(async () => {
         await getOtherUserProfile();
         await getCurrentUser();
+        console.log('Last Location: ', lastLocation);
         setLoading(false);
     }, []);
 
@@ -50,8 +55,14 @@ const UserProfile = () => {
         <div>
             {!loading ? (
                 <div className='flex flex-col'>
+                    <header className='flex flex-row justify-between pt-6 px-6 bg-white'>
+                        <Link to={lastLocation.pathname}>
+                            <Back />
+                        </Link>
+                        <div></div>
+                    </header>
                     <section className='bg-white'>
-                        <header className='my-10 h-20 flex flex-col items-center justify-center'>
+                        <div className='my-10 h-20 flex flex-col items-center justify-center'>
                             <img
                                 className='capitalize rounded-full h-16 w-16'
                                 src={otherUser.photo}
@@ -60,7 +71,7 @@ const UserProfile = () => {
                             <h1 className='capitalize font-semibold'>
                                 {otherUser.username}
                             </h1>
-                        </header>
+                        </div>
 
                         <section className='mx-auto py-4 border-t flex flex-row justify-between w-full'>
                             <div className='mx-auto flex-auto text-center border-r'>

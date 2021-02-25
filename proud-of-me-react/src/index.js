@@ -4,11 +4,14 @@ import './assets/main.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { LastLocationProvider } from 'react-router-last-location';
 
 ReactDOM.render(
     <React.StrictMode>
         <Router>
-            <App />
+            <LastLocationProvider>
+                <App />
+            </LastLocationProvider>
         </Router>
     </React.StrictMode>,
     document.getElementById('root')
