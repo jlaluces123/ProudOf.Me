@@ -24,7 +24,7 @@ const Feed = () => {
 
         await axios
             .get(
-                `https://proud-of-me-backend.herokuapp.com/api/user/${userGoogleId}`
+                `https://proud-of-me-backend.herokuapp.com/api/user/${userGoogleId}/google`
             )
             .then((user) => {
                 setUser(user.data.userFound);

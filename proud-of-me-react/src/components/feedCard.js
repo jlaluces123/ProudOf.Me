@@ -24,7 +24,7 @@ const FeedCard = ({
     const getUserDataForCard = async (userId) => {
         await axios
             .get(
-                `https://proud-of-me-backend.herokuapp.com/api/users/find/${userId}`
+                `https://proud-of-me-backend.herokuapp.com/api/users/find/${userId}/`
             )
             .then((data) => {
                 setUserCardData(data.data.user);
@@ -104,7 +104,7 @@ const FeedCard = ({
                     </div>
                     <Link
                         to={`/${currentUser.googleId}/profile/${userId}`}
-                        className='font-bold ml-2 text-gray-800 hover:underline'
+                        className='font-bold z-10 ml-2 text-gray-800 hover:underline'
                     >
                         {userCardData.username}
                     </Link>

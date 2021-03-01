@@ -7,13 +7,15 @@ export const useCurrentUser = (url) => {
     useEffect(async () => {
         let userGoogleId = url.split('/')[2];
 
-        console.log(userGoogleId);
-        await axios
-            .get(
-                `https://proud-of-me-backend.herokuapp.com/api/user/${userGoogleId}`
-            )
-            .then((user) => setCurrentUser(user.data.userFound))
-            .catch((err) => console.error(err));
+        const fetchCurrentUser = async () => {
+            await axios
+                .get(
+                    `https://proud-of-me-backend.herokuapp.com/api/user/${userGoogleId}/google`
+                )
+                .then((user) => setCurrentUser(user.data.userFound))
+                .catch((err) => console.error(err));
+        };
+        fetchCurrentUser();
     }, []);
 
     return currentUser;
