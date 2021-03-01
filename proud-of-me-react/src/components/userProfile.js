@@ -19,7 +19,7 @@ const UserProfile = () => {
 
         await axios
             .get(
-                `https://proud-of-me-backend.herokuapp.com/api/user/${userGoogleId}`
+                `https://proud-of-me-backend.herokuapp.com/api/user/${userGoogleId}/google`
             )
             .then((user) => {
                 setUser(user.data.userFound);
@@ -51,9 +51,9 @@ const UserProfile = () => {
 
     useEffect(() => console.log(publicPosts), [publicPosts]);
 
-    return (
-        <div>
-            {!loading ? (
+    if (loading === false && user) {
+        return (
+            <div>
                 <div className='flex flex-col'>
                     <header className='flex flex-row justify-between pt-6 px-6 bg-white'>
                         <Link
@@ -106,9 +106,6 @@ const UserProfile = () => {
                     </section>
 
                     <section className='my-4'>
-                        {/* <h1 className='font-semibold text-md bg-white'>
-                            Their Posts
-                        </h1> */}
                         {publicPosts.map((post) => {
                             return (
                                 <FeedCard
@@ -120,11 +117,11 @@ const UserProfile = () => {
                         })}
                     </section>
                 </div>
-            ) : (
-                <h1>Loading...</h1>
-            )}
-        </div>
-    );
+            </div>
+        );
+    } else {
+        return <h1>Loading</h1>;
+    }
 };
 
 export default UserProfile;

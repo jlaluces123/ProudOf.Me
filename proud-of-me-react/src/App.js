@@ -7,12 +7,17 @@ import Feed from './components/feed';
 import Menu from './components/menu';
 import SkeletonFeedCard from './components/skeletonFeedCard';
 import UserProfile from './components/userProfile';
+import Story from './components/story';
 
 function App() {
     return (
         <div className='App bg-gray-100 min-h-screen'>
             <Switch>
                 <Route exact path='/' component={Home} />
+                <Route
+                    path='/view/:userId/moment/:momentId'
+                    component={Story}
+                />
                 <Route
                     path='/:currentUserId/profile/:userId'
                     component={UserProfile}

@@ -24,7 +24,7 @@ const FeedCard = ({
     const getUserDataForCard = async (userId) => {
         await axios
             .get(
-                `https://proud-of-me-backend.herokuapp.com/api/users/find/${userId}`
+                `https://proud-of-me-backend.herokuapp.com/api/users/find/${userId}/`
             )
             .then((data) => {
                 setUserCardData(data.data.user);
@@ -82,6 +82,8 @@ const FeedCard = ({
         console.log(currentUser);
     }, [currentUser]);
 
+    // * FIXED: Div onClick is overriding Link to profile page
+    // * Moved onClick area to the body of the card (title + story)
     return (
         <div className='bg-white flex flex-col h-60 justify-between my-4 pt-4 px-4 shadow-md w-full rounded hover:scale-110 transform duration-300 ease-in-out cursor-pointer hover:shadow-2xl'>
             <header className='flex flex-row justify-between items-center'>
@@ -99,7 +101,7 @@ const FeedCard = ({
                     </div>
                     <Link
                         to={`/${currentUser.googleId}/profile/${userId}`}
-                        className='font-bold ml-2 text-gray-800 hover:underline'
+                        className='font-bold z-10 ml-2 text-gray-800 hover:underline'
                     >
                         {userCardData.username}
                     </Link>
@@ -110,14 +112,17 @@ const FeedCard = ({
             </header>
 
             <section className='flex flex-col justify-between max-h-32 h-full'>
-                <div className=''>
+                <Link
+                    to={`/view/${currentUser.googleId}/moment/${_id}`}
+                    className=''
+                >
                     <h4 className='font-semibold text-gray-700 text-lg'>
                         {title}
                     </h4>
                     <p className='font-semibold text-gray-400 line-clamp-3'>
                         {story}
                     </p>
-                </div>
+                </Link>
                 <span className='font-bold text-green-600'>
                     # TagsComingSoon!
                 </span>

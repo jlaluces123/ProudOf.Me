@@ -21,7 +21,7 @@ const Profile = () => {
             await axios
                 .all([
                     axios.get(
-                        `https://proud-of-me-backend.herokuapp.com/api/user/${userId}`
+                        `https://proud-of-me-backend.herokuapp.com/api/user/${userId}/`
                     ),
                     axios.get(
                         `https://proud-of-me-backend.herokuapp.com/api/user/${userId}/moments`
