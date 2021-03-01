@@ -20,11 +20,11 @@ const Feed = () => {
     const getCurrentUser = async () => {
         let url = window.location.pathname;
         url.split('/');
-        let userGoogleId = url.split('/')[2];
+        let userId = url.split('/')[2];
 
         await axios
             .get(
-                `https://proud-of-me-backend.herokuapp.com/api/user/${userGoogleId}/google`
+                `https://proud-of-me-backend.herokuapp.com/api/user/${userId}/`
             )
             .then((user) => {
                 setUser(user.data.userFound);

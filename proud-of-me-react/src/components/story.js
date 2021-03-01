@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useCurrentUser } from './hooks/useCurrentUser';
 import Back from './icons/back';
+import Book from './icons/book';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { useLastLocation } from 'react-router-last-location';
@@ -69,11 +70,14 @@ const Story = () => {
                         >
                             <Back />
                         </Link>
-                        <img
-                            className='h-8 w-8 rounded-full'
-                            src={currentUser.photo}
-                            alt={`Profile Picture of ${currentUser.username}`}
-                        />
+                        <Link
+                            className='flex flex-row items-center hover:underline cursor-pointer'
+                            to={`/user/${currentUser._id}/feed`}
+                        >
+                            <span className='mr-1 text-sm text-gray-700'>
+                                Back to Feed
+                            </span>
+                        </Link>
                     </header>
 
                     <section className='px-6 pt-6 flex flex-col justify-evenly'>
